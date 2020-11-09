@@ -53,12 +53,18 @@ public class Account {
         if (profiles.size() < streamingPlan.getNumberOfProfiles()) {
             profiles.add(profile);
         } else {
-            //throw new TooManyProfilesException();
+            throw new TooManyProfilesException();
         }
 
     }
 
     public ArrayList<Profile> getProfiles() {
+        Collections.sort(profiles, new Comparator<Profile>() {
+            @Override
+            public int compare(Profile o1, Profile o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
         return profiles;
     }
 
